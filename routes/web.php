@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CompanyDashboardController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentDashboardController;
+use App\Http\Controllers\HoldingDashboardController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\KpiDefinitionController;
+use App\Http\Controllers\KpiValueController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\OrganizationController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +35,31 @@ Route::post('/invitation/{token}', [InvitationController::class, 'register'])->n
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
+    // Main Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Level-specific Dashboards
+    Route::get('/dashboard/department/{department}', [DepartmentDashboardController::class, 'show'])->name('dashboard.department');
+    Route::get('/dashboard/company/{company}', [CompanyDashboardController::class, 'show'])->name('dashboard.company');
+    Route::get('/dashboard/holding/{tenant}', [HoldingDashboardController::class, 'show'])->name('dashboard.holding');
+
+    // KPI Definitions
+    Route::get('/kpis', [KpiDefinitionController::class, 'index'])->name('kpis.index');
+    Route::get('/kpis/create', [KpiDefinitionController::class, 'create'])->name('kpis.create');
+    Route::post('/kpis', [KpiDefinitionController::class, 'store'])->name('kpis.store');
+    Route::get('/kpis/templates', [KpiDefinitionController::class, 'templates'])->name('kpis.templates');
+    Route::post('/kpis/templates/{template}/use', [KpiDefinitionController::class, 'useTemplate'])->name('kpis.use-template');
+    Route::get('/kpis/{kpi}', [KpiDefinitionController::class, 'show'])->name('kpis.show');
+    Route::get('/kpis/{kpi}/edit', [KpiDefinitionController::class, 'edit'])->name('kpis.edit');
+    Route::put('/kpis/{kpi}', [KpiDefinitionController::class, 'update'])->name('kpis.update');
+    Route::delete('/kpis/{kpi}', [KpiDefinitionController::class, 'destroy'])->name('kpis.destroy');
+
+    // KPI Values (data entry)
+    Route::post('/kpis/{kpi}/values', [KpiValueController::class, 'store'])->name('kpi-values.store');
+    Route::post('/kpis/{kpi}/values/bulk', [KpiValueController::class, 'bulkStore'])->name('kpi-values.bulk');
+    Route::post('/kpis/{kpi}/values/import', [KpiValueController::class, 'import'])->name('kpi-values.import');
+    Route::put('/kpi-values/{value}', [KpiValueController::class, 'update'])->name('kpi-values.update');
+    Route::delete('/kpi-values/{value}', [KpiValueController::class, 'destroy'])->name('kpi-values.destroy');
 
     // Organizations
     Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');
