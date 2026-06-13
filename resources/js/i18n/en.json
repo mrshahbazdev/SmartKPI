@@ -1,0 +1,170 @@
+{
+  "app": {
+    "name": "SmartKPI",
+    "tagline": "Intelligent Business Control System"
+  },
+  "nav": {
+    "dashboard": "Overview",
+    "kpis": "KPIs",
+    "analysis": "Analysis",
+    "actions": "Actions",
+    "reports": "Reports",
+    "settings": "Settings",
+    "organizations": "Organizations",
+    "departments": "Departments",
+    "companies": "Companies",
+    "holdings": "Holdings",
+    "users": "Users",
+    "profile": "Profile",
+    "logout": "Log Out"
+  },
+  "auth": {
+    "login": "Log In",
+    "register": "Register",
+    "email": "Email Address",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "remember_me": "Remember Me",
+    "forgot_password": "Forgot Password?",
+    "reset_password": "Reset Password",
+    "send_reset_link": "Send Reset Link",
+    "name": "Name",
+    "already_registered": "Already registered?",
+    "verify_email": "Verify Email Address",
+    "verification_sent": "A new verification link has been sent to your email address.",
+    "resend_verification": "Resend Verification Email"
+  },
+  "dashboard": {
+    "title": "Overview",
+    "welcome": "Welcome back",
+    "daily_focus": "Daily Focus",
+    "top_risks": "Top Risks",
+    "top_wins": "Top Wins",
+    "recent_problems": "Recent Problems",
+    "kpi_overview": "KPI Overview",
+    "trend": "Trend",
+    "no_data": "No data available"
+  },
+  "kpi": {
+    "title": "KPIs",
+    "name": "Name",
+    "value": "Value",
+    "target": "Target",
+    "unit": "Unit",
+    "frequency": "Frequency",
+    "status": "Status",
+    "on_target": "On Target",
+    "warning": "Warning",
+    "critical": "Critical",
+    "error_rate": "Error Rate",
+    "revenue": "Revenue",
+    "processing_time": "Processing Time",
+    "turnover": "Turnover",
+    "satisfaction": "Satisfaction",
+    "profit_margin": "Profit Margin",
+    "add_kpi": "Add KPI",
+    "edit_kpi": "Edit KPI",
+    "delete_kpi": "Delete KPI",
+    "description": "Description",
+    "formula": "Formula",
+    "category": "Category"
+  },
+  "problem": {
+    "detected": "Problem Detected",
+    "severity": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    }
+  },
+  "cause": {
+    "root_cause": "Root Cause",
+    "analysis": "Cause Analysis"
+  },
+  "action": {
+    "suggestion": "Suggested Action",
+    "responsible": "Responsible",
+    "deadline": "Deadline",
+    "status": {
+      "open": "Open",
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "alert": {
+    "critical": "Critical",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "report": {
+    "monthly": "Monthly Report",
+    "export": "Export",
+    "generate": "Generate Report"
+  },
+  "org": {
+    "holding": "Holding",
+    "company": "Company",
+    "department": "Department",
+    "create_holding": "Create Holding",
+    "create_company": "Create Company",
+    "create_department": "Create Department",
+    "edit": "Edit",
+    "delete": "Delete",
+    "name": "Name",
+    "description": "Description",
+    "industry": "Industry",
+    "size": "Size",
+    "timezone": "Timezone",
+    "org_tree": "Organization Structure"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "no_results": "No results",
+    "confirm_delete": "Are you sure you want to delete this item?",
+    "success": "Successfully saved",
+    "error": "An error occurred",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "details": "Details",
+    "status": "Status",
+    "date": "Date",
+    "time": "Time",
+    "all": "All",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "german": "German",
+    "english": "English"
+  },
+  "invitation": {
+    "invite_user": "Invite User",
+    "email": "Email Address",
+    "role": "Role",
+    "send_invitation": "Send Invitation",
+    "invitation_sent": "Invitation has been sent",
+    "accept": "Accept Invitation"
+  }
+}
