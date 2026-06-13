@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KpiDefinition;
 use App\Models\KpiValue;
+use App\Services\ProblemDetectionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class KpiValueController extends Controller
 
         $status = $this->calculateStatus($kpi, (float) $validated['value']);
 
-        KpiValue::create([
+        $kpiValue = KpiValue::create([
             'kpi_definition_id' => $kpi->id,
             'value' => $validated['value'],
             'recorded_at' => $validated['recorded_at'],
@@ -27,6 +28,8 @@ class KpiValueController extends Controller
             'recorded_by' => Auth::id(),
             'status' => $status,
         ]);
+
+        app(ProblemDetectionService::class)->checkKpi($kpi, $kpiValue);
 
         return redirect()->back()->with('success', __('common.success'));
     }

@@ -84,4 +84,16 @@ class KpiDefinition extends Model
     {
         return $this->hasMany(KpiRelationship::class, 'effect_kpi_id');
     }
+
+    public function responsibleUsers()
+    {
+        return $this->belongsToMany(User::class, 'kpi_user')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function alertRules(): HasMany
+    {
+        return $this->hasMany(AlertRule::class);
+    }
 }

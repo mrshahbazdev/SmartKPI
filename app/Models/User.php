@@ -60,4 +60,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Action::class, 'created_by');
     }
+
+    public function ownedKpis()
+    {
+        return $this->belongsToMany(KpiDefinition::class, 'kpi_user')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function alertRules()
+    {
+        return $this->hasMany(AlertRule::class, 'notify_user_id');
+    }
 }

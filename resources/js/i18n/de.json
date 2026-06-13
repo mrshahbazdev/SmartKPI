@@ -107,7 +107,20 @@
     "import": "Importieren"
   },
   "problem": {
+    "title": "Probleme",
     "detected": "Problem erkannt",
+    "no_problems": "Keine Probleme vorhanden",
+    "timeline_view": "Zeitstrahl",
+    "list_view": "Listenansicht",
+    "linked": "Verknüpftes Problem",
+    "all_severities": "Alle Schweregrade",
+    "all_statuses": "Alle Status",
+    "all_assignees": "Alle Verantwortlichen",
+    "severity_label": "Schweregrad",
+    "status_open": "Offen",
+    "status_investigating": "In Untersuchung",
+    "status_resolved": "Gelöst",
+    "status_closed": "Geschlossen",
     "severity": {
       "low": "Niedrig",
       "medium": "Mittel",
@@ -117,12 +130,24 @@
   },
   "cause": {
     "root_cause": "Ursache",
-    "analysis": "Ursachenanalyse"
+    "analysis": "Ursachenanalyse",
+    "confidence": "Konfidenz"
   },
   "action": {
+    "title": "Maßnahmen",
     "suggestion": "Handlungsempfehlung",
     "responsible": "Verantwortlich",
     "deadline": "Frist",
+    "create": "Maßnahme erstellen",
+    "no_actions": "Keine Maßnahmen vorhanden",
+    "show_all": "Alle anzeigen",
+    "priority_label": "Priorität",
+    "all_priorities": "Alle Prioritäten",
+    "source_label": "Quelle",
+    "effectiveness": "Wirksamkeit",
+    "before": "Vorher",
+    "after": "Nachher",
+    "change": "Veränderung",
     "status": {
       "open": "Offen",
       "in_progress": "In Bearbeitung",
@@ -133,7 +158,35 @@
   "alert": {
     "critical": "Kritisch",
     "warning": "Warnung",
-    "info": "Information"
+    "info": "Information",
+    "rules": "Alarmregeln",
+    "add_rule": "Regel hinzufügen",
+    "no_rules": "Keine Alarmregeln vorhanden",
+    "type": "Regeltyp",
+    "operator": "Operator",
+    "consecutive": "Aufeinanderfolgend",
+    "decline": "Rückgang",
+    "increase": "Anstieg",
+    "notify_user": "Benutzer benachrichtigen",
+    "escalation": "Eskalation",
+    "escalation_hours": "Eskalation nach (Stunden)",
+    "all_kpis": "Alle KPIs",
+    "activate": "Aktivieren",
+    "deactivate": "Deaktivieren"
+  },
+  "relationship": {
+    "title": "Ursache-Wirkungs-Beziehungen",
+    "add": "Beziehung hinzufügen",
+    "cause": "Ursache-KPI",
+    "effect": "Wirkungs-KPI",
+    "weight": "Gewicht",
+    "confidence": "Konfidenz",
+    "lag_days": "Verzögerung (Tage)",
+    "graph": "Beziehungsgraph",
+    "trace": "Zurückverfolgen",
+    "no_relationships": "Keine Beziehungen vorhanden",
+    "root_cause_trace": "Ursachenrückverfolgung",
+    "no_causes": "Keine Ursachen gefunden"
   },
   "report": {
     "monthly": "Monatsbericht",
