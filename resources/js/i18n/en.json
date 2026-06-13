@@ -4,7 +4,7 @@
     "tagline": "Intelligent Business Control System"
   },
   "nav": {
-    "dashboard": "Overview",
+    "dashboard": "Dashboard",
     "kpis": "KPIs",
     "analysis": "Analysis",
     "actions": "Actions",
@@ -16,34 +16,40 @@
     "holdings": "Holdings",
     "users": "Users",
     "profile": "Profile",
-    "logout": "Log Out"
+    "logout": "Logout"
   },
   "auth": {
-    "login": "Log In",
+    "login": "Login",
     "register": "Register",
     "email": "Email Address",
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "remember_me": "Remember Me",
-    "forgot_password": "Forgot Password?",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
     "reset_password": "Reset Password",
     "send_reset_link": "Send Reset Link",
     "name": "Name",
     "already_registered": "Already registered?",
     "verify_email": "Verify Email Address",
     "verification_sent": "A new verification link has been sent to your email address.",
-    "resend_verification": "Resend Verification Email"
+    "resend_verification": "Resend Verification Link"
   },
   "dashboard": {
-    "title": "Overview",
+    "title": "Dashboard",
     "welcome": "Welcome back",
     "daily_focus": "Daily Focus",
+    "no_focus": "No focus set for today",
     "top_risks": "Top Risks",
     "top_wins": "Top Wins",
     "recent_problems": "Recent Problems",
     "kpi_overview": "KPI Overview",
+    "kpi_status": "KPI Status",
     "trend": "Trend",
-    "no_data": "No data available"
+    "no_data": "No data available",
+    "company_kpis": "Company KPIs",
+    "risk_score": "Risk Score",
+    "holding_overview": "Holding Overview",
+    "risk_comparison": "Risk Comparison"
   },
   "kpi": {
     "title": "KPIs",
@@ -67,7 +73,38 @@
     "delete_kpi": "Delete KPI",
     "description": "Description",
     "formula": "Formula",
-    "category": "Category"
+    "category": "Category",
+    "create": "Create KPI",
+    "edit": "Edit KPI",
+    "definitions": "Definitions",
+    "template_library": "Template Library",
+    "template_desc": "Pre-built KPI templates to get started quickly",
+    "use_template": "Use Template",
+    "start_from_template": "Start from template",
+    "no_kpis": "No KPIs available",
+    "all_categories": "All Categories",
+    "all_statuses": "All Statuses",
+    "current_value": "Current Value",
+    "trend": "Trend",
+    "add_value": "Add Value",
+    "history": "History",
+    "no_data": "No data available",
+    "direction": "Direction",
+    "higher_better": "Higher is better",
+    "lower_better": "Lower is better",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "quarterly": "Quarterly",
+    "yearly": "Yearly",
+    "warning_threshold": "Warning Threshold",
+    "critical_threshold": "Critical Threshold",
+    "values_imported": "values imported",
+    "import_csv": "Import CSV",
+    "date_column": "Date Column",
+    "value_column": "Value Column",
+    "notes_column": "Notes Column",
+    "import": "Import"
   },
   "problem": {
     "detected": "Problem Detected",
@@ -80,7 +117,7 @@
   },
   "cause": {
     "root_cause": "Root Cause",
-    "analysis": "Cause Analysis"
+    "analysis": "Root Cause Analysis"
   },
   "action": {
     "suggestion": "Suggested Action",
@@ -107,6 +144,7 @@
     "holding": "Holding",
     "company": "Company",
     "department": "Department",
+    "departments": "Departments",
     "create_holding": "Create Holding",
     "create_company": "Create Company",
     "create_department": "Create Department",
@@ -117,7 +155,9 @@
     "industry": "Industry",
     "size": "Size",
     "timezone": "Timezone",
-    "org_tree": "Organization Structure"
+    "org_tree": "Organization Tree",
+    "all_companies": "All Companies",
+    "all_departments": "All Departments"
   },
   "common": {
     "save": "Save",
@@ -146,7 +186,10 @@
     "time": "Time",
     "all": "All",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "days": "Days",
+    "ytd": "Year to Date",
+    "notes": "Notes"
   },
   "settings": {
     "title": "Settings",
