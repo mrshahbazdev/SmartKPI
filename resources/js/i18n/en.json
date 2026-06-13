@@ -107,7 +107,20 @@
     "import": "Import"
   },
   "problem": {
+    "title": "Problems",
     "detected": "Problem Detected",
+    "no_problems": "No problems found",
+    "timeline_view": "Timeline",
+    "list_view": "List View",
+    "linked": "Linked Problem",
+    "all_severities": "All Severities",
+    "all_statuses": "All Statuses",
+    "all_assignees": "All Assignees",
+    "severity_label": "Severity",
+    "status_open": "Open",
+    "status_investigating": "Investigating",
+    "status_resolved": "Resolved",
+    "status_closed": "Closed",
     "severity": {
       "low": "Low",
       "medium": "Medium",
@@ -117,12 +130,24 @@
   },
   "cause": {
     "root_cause": "Root Cause",
-    "analysis": "Root Cause Analysis"
+    "analysis": "Root Cause Analysis",
+    "confidence": "Confidence"
   },
   "action": {
+    "title": "Actions",
     "suggestion": "Suggested Action",
     "responsible": "Responsible",
     "deadline": "Deadline",
+    "create": "Create Action",
+    "no_actions": "No actions found",
+    "show_all": "Show all",
+    "priority_label": "Priority",
+    "all_priorities": "All Priorities",
+    "source_label": "Source",
+    "effectiveness": "Effectiveness",
+    "before": "Before",
+    "after": "After",
+    "change": "Change",
     "status": {
       "open": "Open",
       "in_progress": "In Progress",
@@ -133,7 +158,35 @@
   "alert": {
     "critical": "Critical",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "rules": "Alert Rules",
+    "add_rule": "Add Rule",
+    "no_rules": "No alert rules configured",
+    "type": "Rule Type",
+    "operator": "Operator",
+    "consecutive": "Consecutive",
+    "decline": "Decline",
+    "increase": "Increase",
+    "notify_user": "Notify User",
+    "escalation": "Escalation",
+    "escalation_hours": "Escalate after (hours)",
+    "all_kpis": "All KPIs",
+    "activate": "Activate",
+    "deactivate": "Deactivate"
+  },
+  "relationship": {
+    "title": "Cause-Effect Relationships",
+    "add": "Add Relationship",
+    "cause": "Cause KPI",
+    "effect": "Effect KPI",
+    "weight": "Weight",
+    "confidence": "Confidence",
+    "lag_days": "Lag (days)",
+    "graph": "Relationship Graph",
+    "trace": "Trace",
+    "no_relationships": "No relationships defined",
+    "root_cause_trace": "Root Cause Trace",
+    "no_causes": "No causes found"
   },
   "report": {
     "monthly": "Monthly Report",

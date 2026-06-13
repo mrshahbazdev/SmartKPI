@@ -1,16 +1,22 @@
 <?php
 
+use App\Http\Controllers\ActionController;
+use App\Http\Controllers\AlertRuleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompanyDashboardController;
+use App\Http\Controllers\DailyFocusController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentDashboardController;
 use App\Http\Controllers\HoldingDashboardController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\KpiDefinitionController;
+use App\Http\Controllers\KpiRelationshipController;
 use App\Http\Controllers\KpiValueController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\ProblemController;
 use Illuminate\Support\Facades\Route;
 
 // Locale switching
@@ -72,4 +78,42 @@ Route::middleware(['auth'])->group(function () {
 
     // Invitations
     Route::post('/invitations', [InvitationController::class, 'store'])->name('invitations.store');
+
+    // Problems
+    Route::get('/problems', [ProblemController::class, 'index'])->name('problems.index');
+    Route::get('/problems/timeline', [ProblemController::class, 'timeline'])->name('problems.timeline');
+    Route::get('/problems/{problem}', [ProblemController::class, 'show'])->name('problems.show');
+    Route::put('/problems/{problem}', [ProblemController::class, 'update'])->name('problems.update');
+    Route::post('/problems/{problem}/assign', [ProblemController::class, 'assign'])->name('problems.assign');
+
+    // Actions
+    Route::get('/actions', [ActionController::class, 'index'])->name('actions.index');
+    Route::get('/actions/create', [ActionController::class, 'create'])->name('actions.create');
+    Route::post('/actions', [ActionController::class, 'store'])->name('actions.store');
+    Route::get('/actions/{action}', [ActionController::class, 'show'])->name('actions.show');
+    Route::put('/actions/{action}', [ActionController::class, 'update'])->name('actions.update');
+    Route::delete('/actions/{action}', [ActionController::class, 'destroy'])->name('actions.destroy');
+
+    // KPI Relationships
+    Route::get('/relationships', [KpiRelationshipController::class, 'index'])->name('relationships.index');
+    Route::post('/relationships', [KpiRelationshipController::class, 'store'])->name('relationships.store');
+    Route::put('/relationships/{relationship}', [KpiRelationshipController::class, 'update'])->name('relationships.update');
+    Route::delete('/relationships/{relationship}', [KpiRelationshipController::class, 'destroy'])->name('relationships.destroy');
+    Route::get('/relationships/trace/{kpi}', [KpiRelationshipController::class, 'trace'])->name('relationships.trace');
+    Route::post('/relationships/correlate', [KpiRelationshipController::class, 'correlate'])->name('relationships.correlate');
+
+    // Alert Rules (company-specific triggers)
+    Route::get('/alert-rules', [AlertRuleController::class, 'index'])->name('alert-rules.index');
+    Route::post('/alert-rules', [AlertRuleController::class, 'store'])->name('alert-rules.store');
+    Route::put('/alert-rules/{alertRule}', [AlertRuleController::class, 'update'])->name('alert-rules.update');
+    Route::delete('/alert-rules/{alertRule}', [AlertRuleController::class, 'destroy'])->name('alert-rules.destroy');
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notifications.unread');
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
+
+    // Daily Focus
+    Route::post('/daily-focus/generate', [DailyFocusController::class, 'generate'])->name('daily-focus.generate');
 });
