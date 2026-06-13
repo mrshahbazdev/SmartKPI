@@ -16,7 +16,10 @@
     "holdings": "Holdings",
     "users": "Users",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "holding": "Holding Analysis",
+    "forecast": "Forecast",
+    "goals": "Goals"
   },
   "auth": {
     "login": "Login",
@@ -188,10 +191,84 @@
     "root_cause_trace": "Root Cause Trace",
     "no_causes": "No causes found"
   },
+  "holding": {
+    "risk_overview": "Risk Overview",
+    "cross_effects": "Cross-Company Effects",
+    "benchmark": "Benchmarking",
+    "kpi_health": "KPI Health",
+    "open_problems": "Open Problems",
+    "critical": "Critical",
+    "overdue_actions": "Overdue Actions",
+    "portfolio_risk": "Portfolio Risk",
+    "impact_score": "Impact Score",
+    "no_cross_effects": "No cross-company effects detected",
+    "no_benchmarks": "No benchmark data available"
+  },
+  "forecast": {
+    "title": "Forecast",
+    "select_kpi": "Select KPI",
+    "select_kpi_prompt": "Select a KPI to view its forecast",
+    "days": "days",
+    "generate": "Generate Forecast",
+    "chart": "Forecast Chart",
+    "historical": "Historical",
+    "predicted": "Predicted",
+    "date": "Date",
+    "predicted_val": "Predicted Value",
+    "lower": "Lower Bound",
+    "upper": "Upper Bound",
+    "early_warnings": "Early Warnings",
+    "no_warnings": "No early warnings — all KPIs within safe range"
+  },
+  "scenario": {
+    "title": "What-If Scenarios",
+    "create": "Create Scenario",
+    "no_scenarios": "No scenarios created",
+    "what_if_desc": "If we change X, what happens to Y?",
+    "scenario_name": "Scenario Name",
+    "assumptions": "Assumptions",
+    "add_assumption": "Add assumption",
+    "simulate": "Simulate",
+    "outcomes": "Projected Outcomes",
+    "no_outcomes": "No effects on linked KPIs found"
+  },
+  "goal": {
+    "title": "Goals & OKRs",
+    "create": "Create Goal",
+    "no_goals": "No goals created",
+    "goal_title": "Goal Title",
+    "linked_kpi": "Linked KPI",
+    "target_value": "Target Value",
+    "start": "Start Date",
+    "end": "End Date",
+    "assigned_to": "Assigned To",
+    "deadline": "Deadline",
+    "active": "Active",
+    "achieved": "Achieved",
+    "missed": "Missed",
+    "cancelled": "Cancelled"
+  },
   "report": {
+    "title": "Reports",
     "monthly": "Monthly Report",
     "export": "Export",
-    "generate": "Generate Report"
+    "generate": "Generate Report",
+    "all_companies": "All Companies",
+    "language": "Report Language",
+    "period": "Period",
+    "week": "Week",
+    "month": "Month",
+    "quarter": "Quarter"
+  },
+  "webhook": {
+    "title": "Webhooks",
+    "add": "Add Webhook",
+    "no_webhooks": "No webhooks configured",
+    "url_placeholder": "https://example.com/webhook",
+    "select_event": "Select event",
+    "secret": "Secret Key",
+    "test": "Test",
+    "failures": "failures"
   },
   "org": {
     "holding": "Holding",

@@ -42,9 +42,11 @@ class ProblemDetectionService
         $ruleProblem = $this->checkAlertRules($kpi, $latestValue);
         $problems = array_merge($problems, $ruleProblem);
 
-        // Notify responsible users
+        // Notify responsible users + detect cross-company effects
+        $crossCompanyService = app(CrossCompanyService::class);
         foreach ($problems as $problem) {
             $this->notifyResponsibleUsers($kpi, $problem);
+            $crossCompanyService->detectCrossCompanyEffects($problem);
         }
 
         return $problems;

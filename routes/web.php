@@ -8,7 +8,10 @@ use App\Http\Controllers\CompanyDashboardController;
 use App\Http\Controllers\DailyFocusController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentDashboardController;
+use App\Http\Controllers\ForecastController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\HoldingDashboardController;
+use App\Http\Controllers\HoldingIntelligenceController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\KpiDefinitionController;
 use App\Http\Controllers\KpiRelationshipController;
@@ -17,6 +20,9 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ScenarioController;
+use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 // Locale switching
@@ -116,4 +122,39 @@ Route::middleware(['auth'])->group(function () {
 
     // Daily Focus
     Route::post('/daily-focus/generate', [DailyFocusController::class, 'generate'])->name('daily-focus.generate');
+
+    // Holding Intelligence (Phase 4)
+    Route::get('/holding/risk', [HoldingIntelligenceController::class, 'riskOverview'])->name('holding.risk');
+    Route::get('/holding/cross-effects', [HoldingIntelligenceController::class, 'crossCompanyEffects'])->name('holding.cross-effects');
+    Route::get('/holding/benchmark', [HoldingIntelligenceController::class, 'benchmark'])->name('holding.benchmark');
+
+    // Forecasting
+    Route::get('/forecast', [ForecastController::class, 'index'])->name('forecast.index');
+    Route::post('/forecast/generate', [ForecastController::class, 'generate'])->name('forecast.generate');
+    Route::get('/forecast/warnings', [ForecastController::class, 'earlyWarnings'])->name('forecast.warnings');
+
+    // Scenarios (What-if)
+    Route::get('/scenarios', [ScenarioController::class, 'index'])->name('scenarios.index');
+    Route::get('/scenarios/create', [ScenarioController::class, 'create'])->name('scenarios.create');
+    Route::post('/scenarios', [ScenarioController::class, 'store'])->name('scenarios.store');
+    Route::get('/scenarios/{scenario}', [ScenarioController::class, 'show'])->name('scenarios.show');
+    Route::delete('/scenarios/{scenario}', [ScenarioController::class, 'destroy'])->name('scenarios.destroy');
+
+    // Goals (OKR)
+    Route::get('/goals', [GoalController::class, 'index'])->name('goals.index');
+    Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create');
+    Route::post('/goals', [GoalController::class, 'store'])->name('goals.store');
+    Route::put('/goals/{goal}', [GoalController::class, 'update'])->name('goals.update');
+    Route::delete('/goals/{goal}', [GoalController::class, 'destroy'])->name('goals.destroy');
+
+    // Reports
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate');
+
+    // Webhooks
+    Route::get('/webhooks', [WebhookController::class, 'index'])->name('webhooks.index');
+    Route::post('/webhooks', [WebhookController::class, 'store'])->name('webhooks.store');
+    Route::put('/webhooks/{webhook}', [WebhookController::class, 'update'])->name('webhooks.update');
+    Route::delete('/webhooks/{webhook}', [WebhookController::class, 'destroy'])->name('webhooks.destroy');
+    Route::post('/webhooks/{webhook}/test', [WebhookController::class, 'test'])->name('webhooks.test');
 });
