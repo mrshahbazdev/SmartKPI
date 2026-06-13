@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\ApiKpiController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
+Route::middleware(['auth:sanctum', 'throttle:api'])->prefix('v1')->group(function () {
     // KPIs
     Route::get('/kpis', [ApiKpiController::class, 'index']);
     Route::get('/kpis/{kpi}', [ApiKpiController::class, 'show']);

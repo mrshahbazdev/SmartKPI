@@ -22,17 +22,24 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ScenarioController;
+use App\Http\Controllers\AuditTrailController;
+use App\Http\Controllers\GdprController;
+use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\WhiteLabelController;
 use Illuminate\Support\Facades\Route;
 
 // Locale switching
 Route::get('/locale/{locale}', [LocaleController::class, 'update'])->name('locale.update');
 
+// Public routes
+Route::get('/', fn () => \Inertia\Inertia::render('Landing/Index'))->name('landing');
+Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
+Route::get('/api-docs', fn () => \Inertia\Inertia::render('ApiDocs/Index'))->name('api-docs');
+
 // Guest routes
 Route::middleware('guest')->group(function () {
-    Route::get('/', function () {
-        return redirect('/login');
-    });
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -157,4 +164,27 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/webhooks/{webhook}', [WebhookController::class, 'update'])->name('webhooks.update');
     Route::delete('/webhooks/{webhook}', [WebhookController::class, 'destroy'])->name('webhooks.destroy');
     Route::post('/webhooks/{webhook}/test', [WebhookController::class, 'test'])->name('webhooks.test');
+
+    // Onboarding wizard (Phase 5)
+    Route::get('/onboarding', [OnboardingController::class, 'index'])->name('onboarding');
+    Route::post('/onboarding/step', [OnboardingController::class, 'updateStep'])->name('onboarding.step');
+    Route::post('/onboarding/language', [OnboardingController::class, 'saveLanguage'])->name('onboarding.language');
+    Route::post('/onboarding/structure', [OnboardingController::class, 'saveStructure'])->name('onboarding.structure');
+    Route::post('/onboarding/kpis', [OnboardingController::class, 'saveKpis'])->name('onboarding.kpis');
+    Route::post('/onboarding/invitations', [OnboardingController::class, 'saveInvitations'])->name('onboarding.invitations');
+    Route::post('/onboarding/complete', [OnboardingController::class, 'complete'])->name('onboarding.complete');
+
+    // White-labeling
+    Route::get('/settings/white-label', [WhiteLabelController::class, 'index'])->name('settings.white-label');
+    Route::put('/settings/white-label', [WhiteLabelController::class, 'update'])->name('settings.white-label.update');
+
+    // GDPR/DSGVO
+    Route::get('/gdpr', [GdprController::class, 'index'])->name('gdpr');
+    Route::post('/gdpr/consent', [GdprController::class, 'updateConsent'])->name('gdpr.consent');
+    Route::post('/gdpr/export', [GdprController::class, 'requestExport'])->name('gdpr.export');
+    Route::get('/gdpr/export/{export}/download', [GdprController::class, 'downloadExport'])->name('gdpr.export.download');
+    Route::post('/gdpr/deletion', [GdprController::class, 'requestDeletion'])->name('gdpr.deletion');
+
+    // Audit Trail
+    Route::get('/settings/audit-trail', [AuditTrailController::class, 'index'])->name('settings.audit-trail');
 });
