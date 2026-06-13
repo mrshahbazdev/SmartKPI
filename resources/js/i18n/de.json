@@ -16,7 +16,10 @@
     "holdings": "Holdings",
     "users": "Benutzer",
     "profile": "Profil",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "holding": "Holding-Analyse",
+    "forecast": "Prognose",
+    "goals": "Ziele"
   },
   "auth": {
     "login": "Anmelden",
@@ -188,10 +191,84 @@
     "root_cause_trace": "Ursachenrückverfolgung",
     "no_causes": "Keine Ursachen gefunden"
   },
+  "holding": {
+    "risk_overview": "Risiko-Übersicht",
+    "cross_effects": "Unternehmensübergreifende Auswirkungen",
+    "benchmark": "Benchmarking",
+    "kpi_health": "KPI-Gesundheit",
+    "open_problems": "Offene Probleme",
+    "critical": "Kritisch",
+    "overdue_actions": "Überfällige Maßnahmen",
+    "portfolio_risk": "Portfolio-Risiko",
+    "impact_score": "Auswirkungswert",
+    "no_cross_effects": "Keine unternehmensübergreifenden Auswirkungen",
+    "no_benchmarks": "Keine Benchmark-Daten verfügbar"
+  },
+  "forecast": {
+    "title": "Prognose",
+    "select_kpi": "KPI auswählen",
+    "select_kpi_prompt": "Wählen Sie einen KPI aus, um die Prognose zu sehen",
+    "days": "Tage",
+    "generate": "Prognose erstellen",
+    "chart": "Prognosediagramm",
+    "historical": "Historisch",
+    "predicted": "Prognose",
+    "date": "Datum",
+    "predicted_val": "Prognosewert",
+    "lower": "Untere Grenze",
+    "upper": "Obere Grenze",
+    "early_warnings": "Frühwarnungen",
+    "no_warnings": "Keine Frühwarnungen — alle KPIs im sicheren Bereich"
+  },
+  "scenario": {
+    "title": "Was-wäre-wenn-Szenarien",
+    "create": "Szenario erstellen",
+    "no_scenarios": "Keine Szenarien vorhanden",
+    "what_if_desc": "Wenn wir X ändern, was passiert mit Y?",
+    "scenario_name": "Szenarioname",
+    "assumptions": "Annahmen",
+    "add_assumption": "Annahme hinzufügen",
+    "simulate": "Simulieren",
+    "outcomes": "Prognostizierte Auswirkungen",
+    "no_outcomes": "Keine Auswirkungen auf verknüpfte KPIs gefunden"
+  },
+  "goal": {
+    "title": "Ziele & OKRs",
+    "create": "Ziel erstellen",
+    "no_goals": "Keine Ziele vorhanden",
+    "goal_title": "Zieltitel",
+    "linked_kpi": "Verknüpfter KPI",
+    "target_value": "Zielwert",
+    "start": "Startdatum",
+    "end": "Enddatum",
+    "assigned_to": "Zugewiesen an",
+    "deadline": "Frist",
+    "active": "Aktiv",
+    "achieved": "Erreicht",
+    "missed": "Verfehlt",
+    "cancelled": "Abgebrochen"
+  },
   "report": {
+    "title": "Berichte",
     "monthly": "Monatsbericht",
     "export": "Exportieren",
-    "generate": "Bericht erstellen"
+    "generate": "Bericht erstellen",
+    "all_companies": "Alle Unternehmen",
+    "language": "Berichtssprache",
+    "period": "Zeitraum",
+    "week": "Woche",
+    "month": "Monat",
+    "quarter": "Quartal"
+  },
+  "webhook": {
+    "title": "Webhooks",
+    "add": "Webhook hinzufügen",
+    "no_webhooks": "Keine Webhooks konfiguriert",
+    "url_placeholder": "https://example.com/webhook",
+    "select_event": "Ereignis wählen",
+    "secret": "Geheimer Schlüssel",
+    "test": "Testen",
+    "failures": "Fehler"
   },
   "org": {
     "holding": "Holding",
