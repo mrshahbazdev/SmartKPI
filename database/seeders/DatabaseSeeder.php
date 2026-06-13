@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Department;
 use App\Models\KpiDefinition;
 use App\Models\KpiValue;
+use App\Models\SubscriptionPlan;
 use App\Models\Tenant;
 use App\Models\User;
 use Carbon\Carbon;
@@ -247,6 +248,35 @@ class DatabaseSeeder extends Seeder
                 ]));
             }
         }
+
+        // Seed subscription plans
+        SubscriptionPlan::create([
+            'slug' => 'starter', 'name_de' => 'Starter', 'name_en' => 'Starter',
+            'description_de' => 'Perfekt für kleine Teams mit einem Unternehmen',
+            'description_en' => 'Perfect for small teams with a single company',
+            'price_monthly' => 49, 'price_yearly' => 470, 'currency' => 'EUR',
+            'max_companies' => 1, 'max_departments' => 3, 'max_kpis' => 20, 'max_users' => 5,
+            'has_api_access' => false, 'has_forecasting' => false, 'has_cross_company' => false, 'has_white_label' => false,
+            'sort_order' => 1,
+        ]);
+        SubscriptionPlan::create([
+            'slug' => 'professional', 'name_de' => 'Professional', 'name_en' => 'Professional',
+            'description_de' => 'Für wachsende Unternehmen mit mehreren Abteilungen',
+            'description_en' => 'For growing businesses with multiple departments',
+            'price_monthly' => 149, 'price_yearly' => 1430, 'currency' => 'EUR',
+            'max_companies' => 5, 'max_departments' => 20, 'max_kpis' => 100, 'max_users' => 25,
+            'has_api_access' => true, 'has_forecasting' => true, 'has_cross_company' => false, 'has_white_label' => false,
+            'sort_order' => 2,
+        ]);
+        SubscriptionPlan::create([
+            'slug' => 'enterprise', 'name_de' => 'Enterprise', 'name_en' => 'Enterprise',
+            'description_de' => 'Für Holdings und Konzerne mit unbegrenzten Möglichkeiten',
+            'description_en' => 'For holdings and corporations with unlimited capabilities',
+            'price_monthly' => 399, 'price_yearly' => 3830, 'currency' => 'EUR',
+            'max_companies' => 999, 'max_departments' => 999, 'max_kpis' => 999, 'max_users' => 999,
+            'has_api_access' => true, 'has_forecasting' => true, 'has_cross_company' => true, 'has_white_label' => true,
+            'sort_order' => 3,
+        ]);
     }
 
     private function generateTimeSeries(int $count, float $min, float $max, string $direction, float $target, float $warn, float $crit): array
