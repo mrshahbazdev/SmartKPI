@@ -1,0 +1,170 @@
+{
+  "app": {
+    "name": "SmartKPI",
+    "tagline": "Intelligentes Business-Kontrollsystem"
+  },
+  "nav": {
+    "dashboard": "Übersicht",
+    "kpis": "Kennzahlen",
+    "analysis": "Analyse",
+    "actions": "Maßnahmen",
+    "reports": "Berichte",
+    "settings": "Einstellungen",
+    "organizations": "Organisationen",
+    "departments": "Abteilungen",
+    "companies": "Unternehmen",
+    "holdings": "Holdings",
+    "users": "Benutzer",
+    "profile": "Profil",
+    "logout": "Abmelden"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirm_password": "Passwort bestätigen",
+    "remember_me": "Angemeldet bleiben",
+    "forgot_password": "Passwort vergessen?",
+    "reset_password": "Passwort zurücksetzen",
+    "send_reset_link": "Link zum Zurücksetzen senden",
+    "name": "Name",
+    "already_registered": "Bereits registriert?",
+    "verify_email": "E-Mail-Adresse bestätigen",
+    "verification_sent": "Ein neuer Bestätigungslink wurde an Ihre E-Mail-Adresse gesendet.",
+    "resend_verification": "Bestätigungslink erneut senden"
+  },
+  "dashboard": {
+    "title": "Übersicht",
+    "welcome": "Willkommen zurück",
+    "daily_focus": "Tagesfokus",
+    "top_risks": "Top-Risiken",
+    "top_wins": "Top-Erfolge",
+    "recent_problems": "Aktuelle Probleme",
+    "kpi_overview": "KPI-Übersicht",
+    "trend": "Trend",
+    "no_data": "Keine Daten verfügbar"
+  },
+  "kpi": {
+    "title": "Kennzahlen",
+    "name": "Name",
+    "value": "Wert",
+    "target": "Zielwert",
+    "unit": "Einheit",
+    "frequency": "Häufigkeit",
+    "status": "Status",
+    "on_target": "Im Ziel",
+    "warning": "Warnung",
+    "critical": "Kritisch",
+    "error_rate": "Fehlerquote",
+    "revenue": "Umsatz",
+    "processing_time": "Durchlaufzeit",
+    "turnover": "Fluktuation",
+    "satisfaction": "Zufriedenheit",
+    "profit_margin": "Gewinnmarge",
+    "add_kpi": "KPI hinzufügen",
+    "edit_kpi": "KPI bearbeiten",
+    "delete_kpi": "KPI löschen",
+    "description": "Beschreibung",
+    "formula": "Formel",
+    "category": "Kategorie"
+  },
+  "problem": {
+    "detected": "Problem erkannt",
+    "severity": {
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "high": "Hoch",
+      "critical": "Kritisch"
+    }
+  },
+  "cause": {
+    "root_cause": "Ursache",
+    "analysis": "Ursachenanalyse"
+  },
+  "action": {
+    "suggestion": "Handlungsempfehlung",
+    "responsible": "Verantwortlich",
+    "deadline": "Frist",
+    "status": {
+      "open": "Offen",
+      "in_progress": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "cancelled": "Abgebrochen"
+    }
+  },
+  "alert": {
+    "critical": "Kritisch",
+    "warning": "Warnung",
+    "info": "Information"
+  },
+  "report": {
+    "monthly": "Monatsbericht",
+    "export": "Exportieren",
+    "generate": "Bericht erstellen"
+  },
+  "org": {
+    "holding": "Holding",
+    "company": "Unternehmen",
+    "department": "Abteilung",
+    "create_holding": "Holding erstellen",
+    "create_company": "Unternehmen erstellen",
+    "create_department": "Abteilung erstellen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "name": "Name",
+    "description": "Beschreibung",
+    "industry": "Branche",
+    "size": "Größe",
+    "timezone": "Zeitzone",
+    "org_tree": "Organisationsstruktur"
+  },
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "export": "Exportieren",
+    "import": "Importieren",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "loading": "Laden...",
+    "no_results": "Keine Ergebnisse",
+    "confirm_delete": "Sind Sie sicher, dass Sie dieses Element löschen möchten?",
+    "success": "Erfolgreich gespeichert",
+    "error": "Ein Fehler ist aufgetreten",
+    "yes": "Ja",
+    "no": "Nein",
+    "actions": "Aktionen",
+    "details": "Details",
+    "status": "Status",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "all": "Alle",
+    "active": "Aktiv",
+    "inactive": "Inaktiv"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Design",
+    "dark_mode": "Dunkelmodus",
+    "light_mode": "Hellmodus",
+    "notifications": "Benachrichtigungen",
+    "profile": "Profil",
+    "german": "Deutsch",
+    "english": "Englisch"
+  },
+  "invitation": {
+    "invite_user": "Benutzer einladen",
+    "email": "E-Mail-Adresse",
+    "role": "Rolle",
+    "send_invitation": "Einladung senden",
+    "invitation_sent": "Einladung wurde gesendet",
+    "accept": "Einladung annehmen"
+  }
+}

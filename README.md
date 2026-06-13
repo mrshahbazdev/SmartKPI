@@ -1,58 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SmartKPI — Intelligent Business Control System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A multi-tenant, hierarchical business intelligence SaaS built with **Laravel 11 + Vue.js 3 + PostgreSQL**.
 
-## About Laravel
+**Bilingual:** German (DE) + English (EN) — switchable per user.
+**Responsive:** Desktop, tablet, and mobile with adaptive layouts.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Backend:** Laravel 11 (PHP 8.3), Sanctum Auth, Spatie Permissions
+- **Frontend:** Vue.js 3 + Inertia.js + Tailwind CSS + vue-i18n
+- **Database:** PostgreSQL 16
+- **Multi-tenancy:** stancl/tenancy (DB-per-tenant)
+- **Cache/Queue:** Redis + Laravel Horizon
+- **Charts:** ApexCharts (responsive)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Quick Start
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone
+git clone https://github.com/mrshahbazdev/SmartKPI.git
+cd SmartKPI
 
-php artisan boost:install
+# 2. Install dependencies
+composer install
+npm install
+
+# 3. Configure environment
+cp .env.example .env
+php artisan key:generate
+
+# 4. Setup database (PostgreSQL)
+# Create a database named 'smartkpi' and update .env with your credentials
+
+# 5. Run migrations & seed
+php artisan migrate --seed
+
+# 6. Start development servers
+php artisan serve
+npm run dev
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Demo Credentials
 
-## Contributing
+| Role           | Email               | Password |
+|----------------|---------------------|----------|
+| Super Admin    | admin@smartkpi.com  | password |
+| Holding Admin  | mueller@dentex.de   | password |
+| Company Admin  | schmidt@dentex.de   | password |
+| Dept Manager   | weber@dentex.de     | password |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Project Structure
 
-## Code of Conduct
+```
+app/
+├── Models/           # Eloquent models (Tenant, Company, Department, KPI, etc.)
+├── Http/
+│   ├── Controllers/  # Inertia controllers
+│   └── Middleware/    # SetLocale, HandleInertiaRequests
+├── Services/         # Business logic (KPI Engine, Analysis, etc.)
+resources/
+├── js/
+│   ├── Components/   # Vue components (Layout, Dashboard, Forms)
+│   ├── Pages/        # Inertia pages
+│   └── i18n/         # Translation files (de.json, en.json)
+├── css/              # Tailwind CSS
+└── views/            # Blade templates
+lang/
+├── de/               # German backend translations
+└── en/               # English backend translations
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Data Model
 
-## Security Vulnerabilities
+```
+Tenants (Holdings)
+  └── Companies (GmbHs)
+       └── Departments
+            └── KPI Definitions
+                 └── KPI Values (time-series)
+                      └── Problems (detected)
+                           └── Root Causes
+                                └── Actions
+                                     └── Results
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Roles
 
-## License
+- `super_admin` — Full system access
+- `holding_admin` — Manage all companies in a holding
+- `company_admin` — Manage one company
+- `dept_manager` — Manage one department
+- `employee` — View & enter data
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Features (Phase 1)
+
+- Multi-tenant organization hierarchy
+- Bilingual UI (DE/EN) with per-user language preference
+- Responsive layout (desktop sidebar + mobile bottom nav)
+- Dark mode toggle
+- Role-based access control (5 roles)
+- User invitation system
+- KPI definition catalog with bilingual names
+- Organization tree visualization
+- Demo data seeder (Dentex Holding example)
