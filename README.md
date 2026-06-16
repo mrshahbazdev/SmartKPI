@@ -85,6 +85,16 @@ A **multi-tenant, hierarchical business intelligence SaaS** for tracking KPIs ac
 - **API documentation** — Interactive endpoint reference
 - **Performance** — 12 database indexes, API rate limiting, config/route/view caching
 
+### Phase 6 — AI Intelligence
+- **AI Anomaly Detection** — OpenAI-powered pattern analysis detecting spikes, drifts, seasonal breaks, and outliers beyond simple z-scores
+- **Smart KPI Recommendations** — AI suggests new KPIs based on company type, existing coverage gaps, and industry best practices
+- **Natural Language Insights** — AI-generated bilingual performance reports with trend analysis, key findings, and performance scores
+- **Predictive Actions** — AI suggests corrective measures based on past problem resolutions and effectiveness history
+- **AI Chatbot (KI-Assistent)** — Conversational interface for querying KPI data, asking questions in natural language (DE/EN)
+- **Auto Root Cause Analysis** — AI traces KPI relationship graphs, identifies probable causes with confidence scores, and suggests investigation steps
+- **AI Dashboard** — Centralized view of all AI insights with stats, type filters, and quick navigation
+- **Chat History** — Persistent chat sessions with conversation memory
+
 ---
 
 ## Tech Stack
@@ -98,6 +108,7 @@ A **multi-tenant, hierarchical business intelligence SaaS** for tracking KPIs ac
 | **Audit**      | Spatie Laravel-Activitylog                            |
 | **Tenancy**    | stancl/tenancy (DB-per-tenant)                        |
 | **Cache**      | Redis (VPS) / File-based (shared hosting)             |
+| **AI**         | OpenAI GPT-4o-mini via openai-php/laravel             |
 | **Build**      | Vite 5, PostCSS, Autoprefixer                         |
 
 ---
@@ -116,8 +127,14 @@ A **multi-tenant, hierarchical business intelligence SaaS** for tracking KPIs ac
 │  │Controllers│  │  Services   │  │     Middleware          │ │
 │  │(Inertia)  │  │(KPI Engine, │  │(SetLocale, Inertia,    │ │
 │  │           │  │ Detection,  │  │ Auth, RateLimit)        │ │
-│  │           │  │ Forecast)   │  │                         │ │
-│  └──────────┘  └─────────────┘  └────────────────────────┘ │
+│  │           │  │ Forecast,   │  │                         │ │
+│  │           │  │ AI Service) │  │                         │ │
+│  └──────────┘  └──────┬──────┘  └────────────────────────┘ │
+│                       │                                     │
+│              ┌────────▼────────┐                            │
+│              │  OpenAI API     │                            │
+│              │  (GPT-4o-mini)  │                            │
+│              └─────────────────┘                            │
 │  ┌──────────────────────────────────────────────────────┐   │
 │  │              Eloquent ORM + Spatie RBAC               │   │
 │  └──────────────────────────────────────────────────────┘   │
@@ -551,6 +568,8 @@ cd SmartKPI
 | `CACHE_STORE`        | `redis`          | `file` for shared hosting                |
 | `QUEUE_CONNECTION`   | `redis`          | `sync` for shared hosting                |
 | `SESSION_DRIVER`     | `database`       | `file` for shared hosting                |
+| `OPENAI_API_KEY`     | (empty)          | OpenAI API key for AI features           |
+| `OPENAI_ORGANIZATION`| (empty)          | OpenAI organization ID (optional)        |
 
 ### Subscription Plans (Seeded)
 
@@ -611,7 +630,8 @@ php artisan optimize:clear          # Clear all caches
 - [x] **Phase 3** — Intelligence (Problem Detection, Actions, Ownership)
 - [x] **Phase 4** — Advanced (Forecasting, Risk, Goals, API)
 - [x] **Phase 5** — Scale (Billing, Onboarding, GDPR, Landing)
-- [ ] **Phase 6** — Mobile App (PWA / React Native)
+- [x] **Phase 6** — AI Intelligence (Anomaly Detection, Chatbot, Root Cause, Recommendations)
+- [ ] **Phase 7** — Mobile App (PWA / React Native)
 
 ---
 

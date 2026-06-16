@@ -22,6 +22,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ScenarioController;
+use App\Http\Controllers\AiController;
 use App\Http\Controllers\AuditTrailController;
 use App\Http\Controllers\GdprController;
 use App\Http\Controllers\OnboardingController;
@@ -187,4 +188,21 @@ Route::middleware(['auth'])->group(function () {
 
     // Audit Trail
     Route::get('/settings/audit-trail', [AuditTrailController::class, 'index'])->name('settings.audit-trail');
+
+    // AI Intelligence (Phase 6)
+    Route::get('/ai', [AiController::class, 'dashboard'])->name('ai.dashboard');
+    Route::get('/ai/anomalies', [AiController::class, 'anomalies'])->name('ai.anomalies');
+    Route::post('/ai/anomalies/detect', [AiController::class, 'detectAnomalies'])->name('ai.anomalies.detect');
+    Route::get('/ai/recommendations', [AiController::class, 'recommendations'])->name('ai.recommendations');
+    Route::post('/ai/recommendations/generate', [AiController::class, 'generateRecommendations'])->name('ai.recommendations.generate');
+    Route::get('/ai/insights', [AiController::class, 'insights'])->name('ai.insights');
+    Route::post('/ai/insights/generate', [AiController::class, 'generateInsight'])->name('ai.insights.generate');
+    Route::get('/ai/action-suggestions', [AiController::class, 'actionSuggestions'])->name('ai.action-suggestions');
+    Route::post('/ai/action-suggestions/suggest', [AiController::class, 'suggestActions'])->name('ai.actions.suggest');
+    Route::get('/ai/root-causes', [AiController::class, 'rootCauses'])->name('ai.root-causes');
+    Route::post('/ai/root-causes/analyze', [AiController::class, 'analyzeRootCause'])->name('ai.root-causes.analyze');
+    Route::get('/ai/chatbot', [AiController::class, 'chatbot'])->name('ai.chatbot');
+    Route::post('/ai/chatbot/send', [AiController::class, 'sendMessage'])->name('ai.chat.send');
+    Route::post('/ai/insights/{insight}/dismiss', [AiController::class, 'dismissInsight'])->name('ai.dismiss');
+    Route::post('/ai/insights/{insight}/apply', [AiController::class, 'applyInsight'])->name('ai.apply');
 });
