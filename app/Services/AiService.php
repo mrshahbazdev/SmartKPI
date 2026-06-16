@@ -14,11 +14,23 @@ use App\Models\Problem;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use OpenAI\Laravel\Facades\OpenAI;
+use OpenAI;
 
 class AiService
 {
     private string $model = 'gpt-4o-mini';
+
+    private function getClient(): ?\OpenAI\Client
+    {
+        $user = auth()->user();
+        $apiKey = $user?->openai_api_key;
+
+        if (!$apiKey) {
+            return null;
+        }
+
+        return OpenAI::client($apiKey);
+    }
 
     // ─── 1. AI Anomaly Detection ────────────────────────────────────────────
 
@@ -283,20 +295,27 @@ class AiService
             $history
         );
 
-        try {
-            $result = OpenAI::chat()->create([
-                'model' => $this->model,
-                'messages' => $messages,
-                'max_tokens' => 1000,
-                'temperature' => 0.7,
-            ]);
-
-            $reply = $result->choices[0]->message->content ?? 'Entschuldigung, ich konnte keine Antwort generieren.';
-        } catch (\Exception $e) {
-            Log::error('AI Chat error: ' . $e->getMessage());
+        $client = $this->getClient();
+        if (!$client) {
             $reply = $locale === 'de'
-                ? 'Entschuldigung, der KI-Service ist momentan nicht verfügbar. Bitte versuchen Sie es später erneut.'
-                : 'Sorry, the AI service is currently unavailable. Please try again later.';
+                ? 'Bitte konfigurieren Sie Ihren OpenAI API-Schlüssel unter Einstellungen → KI-Einstellungen.'
+                : 'Please configure your OpenAI API key in Settings → AI Settings.';
+        } else {
+            try {
+                $result = $client->chat()->create([
+                    'model' => $this->model,
+                    'messages' => $messages,
+                    'max_tokens' => 1000,
+                    'temperature' => 0.7,
+                ]);
+
+                $reply = $result->choices[0]->message->content ?? 'Entschuldigung, ich konnte keine Antwort generieren.';
+            } catch (\Exception $e) {
+                Log::error('AI Chat error: ' . $e->getMessage());
+                $reply = $locale === 'de'
+                    ? 'Entschuldigung, der KI-Service ist momentan nicht verfügbar. Bitte versuchen Sie es später erneut.'
+                    : 'Sorry, the AI service is currently unavailable. Please try again later.';
+            }
         }
 
         return AiChatMessage::create([
@@ -374,8 +393,14 @@ class AiService
 
     private function chat(string $prompt): ?string
     {
+        $client = $this->getClient();
+        if (!$client) {
+            Log::warning('AI Service: No OpenAI API key configured for user.');
+            return null;
+        }
+
         try {
-            $result = OpenAI::chat()->create([
+            $result = $client->chat()->create([
                 'model' => $this->model,
                 'messages' => [
                     ['role' => 'system', 'content' => 'You are a KPI analysis AI. Always respond with valid JSON. Be bilingual (German + English).'],

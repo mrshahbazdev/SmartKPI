@@ -487,5 +487,21 @@
     "chat_description": "Ask questions about your KPIs, performance data, and analyses. I'll help you make data-driven decisions.",
     "chat_placeholder": "Ask me anything about your KPIs...",
     "send": "Send"
+  },
+  "ai_settings": {
+    "title": "AI Settings",
+    "info_title": "OpenAI API Key",
+    "info_description": "Each user provides their own OpenAI API key for AI features. Your key is stored encrypted in the database.",
+    "get_key_link": "Get an API key from OpenAI",
+    "api_key": "API Key",
+    "key_active": "API key configured",
+    "no_key": "No API key configured",
+    "enter_key": "Enter your OpenAI API key",
+    "save_key": "Save Key",
+    "change_key": "Change Key",
+    "remove_key": "Remove Key",
+    "confirm_remove": "Are you sure you want to remove your API key? AI features will be disabled.",
+    "security_title": "Security",
+    "security_description": "Your API key is stored with AES-256-CBC encryption. Only you have access to it. It is never displayed in plain text or shared."
   }
 }

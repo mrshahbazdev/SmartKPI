@@ -21,11 +21,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'locale',
         'theme',
         'department_id',
+        'openai_api_key',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'openai_api_key',
     ];
 
     protected function casts(): array
@@ -33,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'openai_api_key' => 'encrypted',
         ];
     }
 

@@ -23,6 +23,7 @@ use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ScenarioController;
 use App\Http\Controllers\AiController;
+use App\Http\Controllers\AiSettingsController;
 use App\Http\Controllers\AuditTrailController;
 use App\Http\Controllers\GdprController;
 use App\Http\Controllers\OnboardingController;
@@ -185,6 +186,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/gdpr/export', [GdprController::class, 'requestExport'])->name('gdpr.export');
     Route::get('/gdpr/export/{export}/download', [GdprController::class, 'downloadExport'])->name('gdpr.export.download');
     Route::post('/gdpr/deletion', [GdprController::class, 'requestDeletion'])->name('gdpr.deletion');
+
+    // AI Settings (per-user API key)
+    Route::get('/settings/ai', [AiSettingsController::class, 'index'])->name('settings.ai');
+    Route::put('/settings/ai', [AiSettingsController::class, 'update'])->name('settings.ai.update');
+    Route::delete('/settings/ai', [AiSettingsController::class, 'remove'])->name('settings.ai.remove');
 
     // Audit Trail
     Route::get('/settings/audit-trail', [AuditTrailController::class, 'index'])->name('settings.audit-trail');
