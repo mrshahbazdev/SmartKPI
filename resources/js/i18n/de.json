@@ -487,5 +487,21 @@
     "chat_description": "Stellen Sie Fragen zu Ihren KPIs, Leistungsdaten und Analysen. Ich helfe Ihnen, datengestützte Entscheidungen zu treffen.",
     "chat_placeholder": "Fragen Sie mich etwas über Ihre KPIs...",
     "send": "Senden"
+  },
+  "ai_settings": {
+    "title": "KI-Einstellungen",
+    "info_title": "OpenAI API-Schlüssel",
+    "info_description": "Jeder Benutzer verwendet seinen eigenen OpenAI API-Schlüssel für KI-Funktionen. Der Schlüssel wird verschlüsselt in der Datenbank gespeichert.",
+    "get_key_link": "API-Schlüssel bei OpenAI erstellen",
+    "api_key": "API-Schlüssel",
+    "key_active": "API-Schlüssel konfiguriert",
+    "no_key": "Kein API-Schlüssel konfiguriert",
+    "enter_key": "OpenAI API-Schlüssel eingeben",
+    "save_key": "Schlüssel speichern",
+    "change_key": "Schlüssel ändern",
+    "remove_key": "Schlüssel entfernen",
+    "confirm_remove": "Sind Sie sicher, dass Sie den API-Schlüssel entfernen möchten? KI-Funktionen werden deaktiviert.",
+    "security_title": "Sicherheit",
+    "security_description": "Ihr API-Schlüssel wird mit AES-256-CBC verschlüsselt gespeichert. Nur Sie haben Zugriff darauf. Er wird niemals im Klartext angezeigt oder weitergegeben."
   }
 }

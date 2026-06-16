@@ -568,8 +568,7 @@ cd SmartKPI
 | `CACHE_STORE`        | `redis`          | `file` for shared hosting                |
 | `QUEUE_CONNECTION`   | `redis`          | `sync` for shared hosting                |
 | `SESSION_DRIVER`     | `database`       | `file` for shared hosting                |
-| `OPENAI_API_KEY`     | (empty)          | OpenAI API key for AI features           |
-| `OPENAI_ORGANIZATION`| (empty)          | OpenAI organization ID (optional)        |
+| `OPENAI_API_KEY`     | —                | Per-user (Settings → AI Settings), not in .env |
 
 ### Subscription Plans (Seeded)
 
