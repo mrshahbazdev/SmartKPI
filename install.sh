@@ -975,6 +975,9 @@ EOF
         print_warn "$issues potential issue(s) — run './install.sh --health' for details"
     fi
 
+    # Mark as installed for web installer detection
+    date -Iseconds > "$PROJECT_DIR/storage/installed" 2>/dev/null || true
+
     # ─── Installation Complete ───────────────────────────────────────────────
     local elapsed=$(( $(date +%s) - INSTALL_START ))
 
