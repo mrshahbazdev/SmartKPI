@@ -25,12 +25,20 @@ use App\Http\Controllers\ScenarioController;
 use App\Http\Controllers\AiController;
 use App\Http\Controllers\AiSettingsController;
 use App\Http\Controllers\AuditTrailController;
+use App\Http\Controllers\InstallerController;
 use App\Http\Controllers\GdprController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\WhiteLabelController;
 use Illuminate\Support\Facades\Route;
+
+// Web Installer (WordPress-style)
+Route::get('/install', [InstallerController::class, 'index'])->name('installer');
+Route::post('/install/test-db', [InstallerController::class, 'testDatabase'])->name('installer.test-db');
+Route::post('/install/environment', [InstallerController::class, 'saveEnvironment'])->name('installer.environment');
+Route::post('/install/migrate', [InstallerController::class, 'runMigrations'])->name('installer.migrate');
+Route::post('/install/admin', [InstallerController::class, 'createAdmin'])->name('installer.admin');
 
 // Locale switching
 Route::get('/locale/{locale}', [LocaleController::class, 'update'])->name('locale.update');
