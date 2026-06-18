@@ -68,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
     // Main Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-<<<<<<< HEAD
     // Level-specific Dashboards
     Route::get('/dashboard/department/{department}', [DepartmentDashboardController::class, 'show'])->name('dashboard.department');
     Route::get('/dashboard/company/{company}', [CompanyDashboardController::class, 'show'])->name('dashboard.company');
