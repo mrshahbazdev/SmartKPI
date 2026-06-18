@@ -67,27 +67,27 @@ const severityColors = {
 
             <!-- Quick Actions -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                <Link :href="route('ai.anomalies')" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-600 transition-colors">
+                <Link href="/ai/anomalies" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-600 transition-colors">
                     <span class="text-2xl mb-1">🔍</span>
                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ t('ai.anomaly_detection') }}</span>
                 </Link>
-                <Link :href="route('ai.recommendations')" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-colors">
+                <Link href="/ai/recommendations" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-colors">
                     <span class="text-2xl mb-1">💡</span>
                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ t('ai.kpi_recommendations') }}</span>
                 </Link>
-                <Link :href="route('ai.insights')" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 transition-colors">
+                <Link href="/ai/insights" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 transition-colors">
                     <span class="text-2xl mb-1">📊</span>
                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ t('ai.nl_insights') }}</span>
                 </Link>
-                <Link :href="route('ai.action-suggestions')" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-yellow-300 dark:hover:border-yellow-600 transition-colors">
+                <Link href="/ai/action-suggestions" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-yellow-300 dark:hover:border-yellow-600 transition-colors">
                     <span class="text-2xl mb-1">⚡</span>
                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ t('ai.predictive_actions') }}</span>
                 </Link>
-                <Link :href="route('ai.root-causes')" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+                <Link href="/ai/root-causes" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
                     <span class="text-2xl mb-1">🔬</span>
                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ t('ai.root_cause_analysis') }}</span>
                 </Link>
-                <Link :href="route('ai.chatbot')" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-cyan-300 dark:hover:border-cyan-600 transition-colors">
+                <Link href="/ai/chatbot" class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-cyan-300 dark:hover:border-cyan-600 transition-colors">
                     <span class="text-2xl mb-1">🤖</span>
                     <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ t('ai.chatbot') }}</span>
                 </Link>

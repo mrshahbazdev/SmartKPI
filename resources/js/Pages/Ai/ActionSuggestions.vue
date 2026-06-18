@@ -13,11 +13,11 @@ const form = useForm({ problem_id: '' })
 
 const generate = () => {
     form.problem_id = selectedProblem.value
-    form.post(route('ai.actions.suggest'), { preserveScroll: true })
+    form.post('/ai/action-suggestions/suggest', { preserveScroll: true })
 }
 
-const apply = (id) => router.post(route('ai.apply', id), {}, { preserveScroll: true })
-const dismiss = (id) => router.post(route('ai.dismiss', id), {}, { preserveScroll: true })
+const apply = (id) => router.post(`/ai/insights/${id}/apply`, {}, { preserveScroll: true })
+const dismiss = (id) => router.post(`/ai/insights/${id}/dismiss`, {}, { preserveScroll: true })
 </script>
 
 <template>

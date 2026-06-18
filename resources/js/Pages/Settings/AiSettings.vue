@@ -17,7 +17,7 @@ const form = useForm({
 })
 
 const save = () => {
-    form.put(route('settings.ai.update'), {
+    form.put('/settings/ai', {
         preserveScroll: true,
         onSuccess: () => {
             form.openai_api_key = ''
@@ -28,7 +28,7 @@ const save = () => {
 
 const remove = () => {
     if (confirm(t('ai_settings.confirm_remove'))) {
-        router.delete(route('settings.ai.remove'), { preserveScroll: true })
+        router.delete('/settings/ai', { preserveScroll: true })
         showInput.value = true
     }
 }

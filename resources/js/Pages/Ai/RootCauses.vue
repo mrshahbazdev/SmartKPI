@@ -13,10 +13,10 @@ const form = useForm({ problem_id: '' })
 
 const analyze = () => {
     form.problem_id = selectedProblem.value
-    form.post(route('ai.root-causes.analyze'), { preserveScroll: true })
+    form.post('/ai/root-causes/analyze', { preserveScroll: true })
 }
 
-const dismiss = (id) => router.post(route('ai.dismiss', id), {}, { preserveScroll: true })
+const dismiss = (id) => router.post(`/ai/insights/${id}/dismiss`, {}, { preserveScroll: true })
 </script>
 
 <template>

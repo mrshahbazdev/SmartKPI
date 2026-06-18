@@ -13,11 +13,11 @@ const form = useForm({ company_id: '' })
 
 const generate = () => {
     form.company_id = selectedCompany.value
-    form.post(route('ai.recommendations.generate'), { preserveScroll: true })
+    form.post('/ai/recommendations/generate', { preserveScroll: true })
 }
 
-const apply = (id) => router.post(route('ai.apply', id), {}, { preserveScroll: true })
-const dismiss = (id) => router.post(route('ai.dismiss', id), {}, { preserveScroll: true })
+const apply = (id) => router.post(`/ai/insights/${id}/apply`, {}, { preserveScroll: true })
+const dismiss = (id) => router.post(`/ai/insights/${id}/dismiss`, {}, { preserveScroll: true })
 </script>
 
 <template>

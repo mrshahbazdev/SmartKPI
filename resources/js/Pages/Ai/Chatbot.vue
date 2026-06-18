@@ -34,7 +34,7 @@ const sendMessage = () => {
     if (!form.message.trim()) return
 
     isTyping.value = true
-    form.post(route('ai.chat.send'), {
+    form.post('/ai/chatbot/send', {
         preserveScroll: true,
         onSuccess: () => {
             form.message = ''
@@ -48,7 +48,7 @@ const sendMessage = () => {
 }
 
 const newSession = () => {
-    router.get(route('ai.chatbot'))
+    router.get('/ai/chatbot')
 }
 
 const quickQuestions = [
@@ -71,7 +71,7 @@ const quickQuestions = [
                 </div>
                 <div class="overflow-y-auto max-h-full">
                     <Link v-for="session in sessions" :key="session.session_id"
-                        :href="route('ai.chatbot', { session: session.session_id })"
+                        :href="`/ai/chatbot?session=${session.session_id}`"
                         class="block p-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 border-b border-gray-100 dark:border-gray-700"
                         :class="{ 'bg-blue-50 dark:bg-blue-900/20': session.session_id === sessionId }">
                         <div class="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">
