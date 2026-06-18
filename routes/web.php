@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -31,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Analysis
+    Route::get('/analysis', [AnalysisController::class, 'index'])->name('analysis');
 
     // Organizations
     Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');
