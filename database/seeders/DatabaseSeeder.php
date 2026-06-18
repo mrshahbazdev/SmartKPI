@@ -5,8 +5,11 @@ namespace Database\Seeders;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\KpiDefinition;
+use App\Models\KpiValue;
+use App\Models\SubscriptionPlan;
 use App\Models\Tenant;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -141,42 +144,164 @@ class DatabaseSeeder extends Seeder
             ['name_de' => 'Liefertreue', 'name_en' => 'On-Time Delivery', 'description_de' => 'Anteil pünktlich gelieferter Aufträge', 'description_en' => 'Percentage of orders delivered on time', 'unit' => '%', 'target_value' => 95.00, 'warning_threshold' => 90.00, 'critical_threshold' => 85.00, 'direction' => 'higher_better', 'category' => 'Logistics', 'frequency' => 'weekly'],
         ];
 
-        // Create templates
         foreach ($kpiTemplates as $tpl) {
             KpiDefinition::create(array_merge($tpl, ['is_template' => true]));
         }
 
-        // Assign some KPIs to departments
-        KpiDefinition::create([
-            'department_id' => $fertigung->id,
-            'company_id' => $dentexProd->id,
-            'name_de' => 'Fehlerquote',
-            'name_en' => 'Error Rate',
-            'description_de' => 'Anteil fehlerhafter Produkte',
-            'description_en' => 'Defective product rate',
-            'unit' => '%',
-            'target_value' => 5.00,
-            'warning_threshold' => 4.00,
-            'critical_threshold' => 6.00,
-            'direction' => 'lower_better',
-            'category' => 'Manufacturing',
-            'frequency' => 'daily',
-        ]);
+        // Create department-assigned KPIs with time-series data
+        $departmentKpis = [
+            // Fertigung KPIs
+            [
+                'dept' => $fertigung, 'company' => $dentexProd,
+                'name_de' => 'Fehlerquote', 'name_en' => 'Error Rate',
+                'description_de' => 'Anteil fehlerhafter Produkte', 'description_en' => 'Defective product rate',
+                'unit' => '%', 'target_value' => 5.00, 'warning_threshold' => 4.00, 'critical_threshold' => 6.00,
+                'direction' => 'lower_better', 'category' => 'Manufacturing', 'frequency' => 'daily',
+                'values' => fn () => $this->generateTimeSeries(30, 3.0, 6.5, 'lower_better', 5.0, 4.0, 6.0),
+            ],
+            [
+                'dept' => $fertigung, 'company' => $dentexProd,
+                'name_de' => 'OEE', 'name_en' => 'OEE',
+                'description_de' => 'Gesamtanlageneffektivität', 'description_en' => 'Overall Equipment Effectiveness',
+                'unit' => '%', 'target_value' => 85.00, 'warning_threshold' => 75.00, 'critical_threshold' => 65.00,
+                'direction' => 'higher_better', 'category' => 'Manufacturing', 'frequency' => 'daily',
+                'values' => fn () => $this->generateTimeSeries(30, 60.0, 92.0, 'higher_better', 85.0, 75.0, 65.0),
+            ],
+            [
+                'dept' => $fertigung, 'company' => $dentexProd,
+                'name_de' => 'Durchlaufzeit', 'name_en' => 'Processing Time',
+                'description_de' => 'Durchschnittliche Bearbeitungszeit', 'description_en' => 'Average processing time',
+                'unit' => 'h', 'target_value' => 3.00, 'warning_threshold' => 3.50, 'critical_threshold' => 4.50,
+                'direction' => 'lower_better', 'category' => 'Manufacturing', 'frequency' => 'daily',
+                'values' => fn () => $this->generateTimeSeries(30, 2.0, 5.0, 'lower_better', 3.0, 3.5, 4.5),
+            ],
+            // Qualitätskontrolle KPIs
+            [
+                'dept' => $qualitaet, 'company' => $dentexProd,
+                'name_de' => 'Prüfquote', 'name_en' => 'Inspection Rate',
+                'description_de' => 'Anteil geprüfter Produkte', 'description_en' => 'Percentage of inspected products',
+                'unit' => '%', 'target_value' => 100.00, 'warning_threshold' => 95.00, 'critical_threshold' => 90.00,
+                'direction' => 'higher_better', 'category' => 'Quality', 'frequency' => 'daily',
+                'values' => fn () => $this->generateTimeSeries(30, 88.0, 100.0, 'higher_better', 100.0, 95.0, 90.0),
+            ],
+            // Logistik KPIs
+            [
+                'dept' => $logistik, 'company' => $dentexProd,
+                'name_de' => 'Liefertreue', 'name_en' => 'On-Time Delivery',
+                'description_de' => 'Anteil pünktlich gelieferter Aufträge', 'description_en' => 'Percentage of orders delivered on time',
+                'unit' => '%', 'target_value' => 95.00, 'warning_threshold' => 90.00, 'critical_threshold' => 85.00,
+                'direction' => 'higher_better', 'category' => 'Logistics', 'frequency' => 'weekly',
+                'values' => fn () => $this->generateTimeSeries(12, 82.0, 98.0, 'higher_better', 95.0, 90.0, 85.0),
+            ],
+            // Innendienst KPIs
+            [
+                'dept' => $vertriebInnen, 'company' => $dentexVertrieb,
+                'name_de' => 'Umsatz', 'name_en' => 'Revenue',
+                'description_de' => 'Monatlicher Umsatz', 'description_en' => 'Monthly revenue',
+                'unit' => 'EUR', 'target_value' => 150000.00, 'warning_threshold' => 120000.00, 'critical_threshold' => 100000.00,
+                'direction' => 'higher_better', 'category' => 'Sales', 'frequency' => 'monthly',
+                'values' => fn () => $this->generateTimeSeries(6, 90000.0, 180000.0, 'higher_better', 150000.0, 120000.0, 100000.0),
+            ],
+            [
+                'dept' => $vertriebInnen, 'company' => $dentexVertrieb,
+                'name_de' => 'Kundenzufriedenheit', 'name_en' => 'Customer Satisfaction',
+                'description_de' => 'Kundenzufriedenheitsindex', 'description_en' => 'Customer satisfaction index',
+                'unit' => '%', 'target_value' => 90.00, 'warning_threshold' => 80.00, 'critical_threshold' => 70.00,
+                'direction' => 'higher_better', 'category' => 'Sales', 'frequency' => 'monthly',
+                'values' => fn () => $this->generateTimeSeries(6, 65.0, 95.0, 'higher_better', 90.0, 80.0, 70.0),
+            ],
+            // Außendienst KPIs
+            [
+                'dept' => $vertriebAussen, 'company' => $dentexVertrieb,
+                'name_de' => 'Conversion Rate', 'name_en' => 'Conversion Rate',
+                'description_de' => 'Anteil abgeschlossener Deals', 'description_en' => 'Percentage of closed deals',
+                'unit' => '%', 'target_value' => 25.00, 'warning_threshold' => 18.00, 'critical_threshold' => 12.00,
+                'direction' => 'higher_better', 'category' => 'Sales', 'frequency' => 'monthly',
+                'values' => fn () => $this->generateTimeSeries(6, 10.0, 32.0, 'higher_better', 25.0, 18.0, 12.0),
+            ],
+            // Marketing KPIs
+            [
+                'dept' => $marketing, 'company' => $dentexVertrieb,
+                'name_de' => 'Kampagnen-ROI', 'name_en' => 'Campaign ROI',
+                'description_de' => 'Return on Investment für Marketingkampagnen', 'description_en' => 'Return on investment for marketing campaigns',
+                'unit' => '%', 'target_value' => 200.00, 'warning_threshold' => 150.00, 'critical_threshold' => 100.00,
+                'direction' => 'higher_better', 'category' => 'Marketing', 'frequency' => 'monthly',
+                'values' => fn () => $this->generateTimeSeries(6, 80.0, 280.0, 'higher_better', 200.0, 150.0, 100.0),
+            ],
+        ];
 
-        KpiDefinition::create([
-            'department_id' => $vertriebInnen->id,
-            'company_id' => $dentexVertrieb->id,
-            'name_de' => 'Umsatz',
-            'name_en' => 'Revenue',
-            'description_de' => 'Monatlicher Umsatz',
-            'description_en' => 'Monthly revenue',
-            'unit' => 'EUR',
-            'target_value' => 150000.00,
-            'warning_threshold' => 120000.00,
-            'critical_threshold' => 100000.00,
-            'direction' => 'higher_better',
-            'category' => 'Sales',
-            'frequency' => 'monthly',
+        foreach ($departmentKpis as $kpiDef) {
+            $dept = $kpiDef['dept'];
+            $company = $kpiDef['company'];
+            $valuesGenerator = $kpiDef['values'];
+            unset($kpiDef['values'], $kpiDef['dept'], $kpiDef['company']);
+
+            $kpi = KpiDefinition::create(array_merge($kpiDef, [
+                'department_id' => $dept->id,
+                'company_id' => $company->id,
+            ]));
+
+            foreach ($valuesGenerator() as $val) {
+                KpiValue::create(array_merge($val, [
+                    'kpi_definition_id' => $kpi->id,
+                    'recorded_by' => $admin->id,
+                ]));
+            }
+        }
+
+        // Seed subscription plans
+        SubscriptionPlan::create([
+            'slug' => 'starter', 'name_de' => 'Starter', 'name_en' => 'Starter',
+            'description_de' => 'Perfekt für kleine Teams mit einem Unternehmen',
+            'description_en' => 'Perfect for small teams with a single company',
+            'price_monthly' => 49, 'price_yearly' => 470, 'currency' => 'EUR',
+            'max_companies' => 1, 'max_departments' => 3, 'max_kpis' => 20, 'max_users' => 5,
+            'has_api_access' => false, 'has_forecasting' => false, 'has_cross_company' => false, 'has_white_label' => false,
+            'sort_order' => 1,
         ]);
+        SubscriptionPlan::create([
+            'slug' => 'professional', 'name_de' => 'Professional', 'name_en' => 'Professional',
+            'description_de' => 'Für wachsende Unternehmen mit mehreren Abteilungen',
+            'description_en' => 'For growing businesses with multiple departments',
+            'price_monthly' => 149, 'price_yearly' => 1430, 'currency' => 'EUR',
+            'max_companies' => 5, 'max_departments' => 20, 'max_kpis' => 100, 'max_users' => 25,
+            'has_api_access' => true, 'has_forecasting' => true, 'has_cross_company' => false, 'has_white_label' => false,
+            'sort_order' => 2,
+        ]);
+        SubscriptionPlan::create([
+            'slug' => 'enterprise', 'name_de' => 'Enterprise', 'name_en' => 'Enterprise',
+            'description_de' => 'Für Holdings und Konzerne mit unbegrenzten Möglichkeiten',
+            'description_en' => 'For holdings and corporations with unlimited capabilities',
+            'price_monthly' => 399, 'price_yearly' => 3830, 'currency' => 'EUR',
+            'max_companies' => 999, 'max_departments' => 999, 'max_kpis' => 999, 'max_users' => 999,
+            'has_api_access' => true, 'has_forecasting' => true, 'has_cross_company' => true, 'has_white_label' => true,
+            'sort_order' => 3,
+        ]);
+    }
+
+    private function generateTimeSeries(int $count, float $min, float $max, string $direction, float $target, float $warn, float $crit): array
+    {
+        $values = [];
+        $current = $min + ($max - $min) * 0.5;
+
+        for ($i = $count - 1; $i >= 0; $i--) {
+            $drift = (mt_rand(-20, 20) / 100.0) * ($max - $min) * 0.1;
+            $current = max($min, min($max, $current + $drift));
+
+            // Determine status
+            if ($direction === 'higher_better') {
+                $status = $current >= $target ? 'on_target' : ($current >= $warn ? 'on_target' : ($current >= $crit ? 'warning' : 'critical'));
+            } else {
+                $status = $current <= $target ? 'on_target' : ($current <= $warn ? 'on_target' : ($current <= $crit ? 'warning' : 'critical'));
+            }
+
+            $values[] = [
+                'value' => round($current, 2),
+                'recorded_at' => Carbon::now()->subDays($i)->format('Y-m-d'),
+                'status' => $status,
+            ];
+        }
+
+        return $values;
     }
 }

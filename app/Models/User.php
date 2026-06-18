@@ -21,11 +21,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'locale',
         'theme',
         'department_id',
+        'openai_api_key',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'openai_api_key',
     ];
 
     protected function casts(): array
@@ -33,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'openai_api_key' => 'encrypted',
         ];
     }
 
@@ -59,5 +62,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function createdActions(): HasMany
     {
         return $this->hasMany(Action::class, 'created_by');
+    }
+
+    public function ownedKpis()
+    {
+        return $this->belongsToMany(KpiDefinition::class, 'kpi_user')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function alertRules()
+    {
+        return $this->hasMany(AlertRule::class, 'notify_user_id');
     }
 }

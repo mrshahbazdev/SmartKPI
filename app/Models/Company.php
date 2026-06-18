@@ -46,4 +46,9 @@ class Company extends Model
     {
         return $this->hasManyThrough(User::class, Department::class);
     }
+
+    public function alertRules(): HasMany
+    {
+        return $this->hasMany(AlertRule::class);
+    }
 }
