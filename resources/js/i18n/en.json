@@ -295,6 +295,8 @@
     "create_holding": "Create Holding",
     "create_company": "Create Company",
     "create_department": "Create Department",
+    "edit_company": "Edit Company",
+    "edit_department": "Edit Department",
     "edit": "Edit",
     "delete": "Delete",
     "name": "Name",

@@ -204,13 +204,70 @@
           </div>
         </div>
       </Teleport>
+      <!-- Edit Company Modal -->
+      <Teleport to="body">
+        <div v-if="editingCompany" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div class="absolute inset-0 bg-black/50" @click="editingCompany = null"></div>
+          <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6 space-y-4">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $t('org.edit_company') }}</h3>
+            <form @submit.prevent="updateCompany" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('org.name') }}</label>
+                <input v-model="editCompanyForm.name" type="text" required class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('org.description') }}</label>
+                <textarea v-model="editCompanyForm.description" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white" rows="2"></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('org.industry') }}</label>
+                <input v-model="editCompanyForm.industry" type="text" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
+              </div>
+              <div class="flex justify-between">
+                <button type="button" @click="deleteCompany" class="px-4 py-2 text-sm text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg">{{ $t('common.delete') }}</button>
+                <div class="flex gap-3">
+                  <button type="button" @click="editingCompany = null" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800">{{ $t('common.cancel') }}</button>
+                  <button type="submit" :disabled="editCompanyForm.processing" class="px-4 py-2 bg-primary-600 text-white text-sm rounded-lg hover:bg-primary-700 disabled:opacity-50">{{ $t('common.save') }}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Teleport>
+
+      <!-- Edit Department Modal -->
+      <Teleport to="body">
+        <div v-if="editingDepartment" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div class="absolute inset-0 bg-black/50" @click="editingDepartment = null"></div>
+          <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6 space-y-4">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $t('org.edit_department') }}</h3>
+            <form @submit.prevent="updateDepartment" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('org.name') }}</label>
+                <input v-model="editDeptForm.name" type="text" required class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('org.description') }}</label>
+                <textarea v-model="editDeptForm.description" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white" rows="2"></textarea>
+              </div>
+              <div class="flex justify-between">
+                <button type="button" @click="deleteDepartment" class="px-4 py-2 text-sm text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg">{{ $t('common.delete') }}</button>
+                <div class="flex gap-3">
+                  <button type="button" @click="editingDepartment = null" class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800">{{ $t('common.cancel') }}</button>
+                  <button type="submit" :disabled="editDeptForm.processing" class="px-4 py-2 bg-primary-600 text-white text-sm rounded-lg hover:bg-primary-700 disabled:opacity-50">{{ $t('common.save') }}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Teleport>
     </div>
   </AppShell>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
+import { useForm, router } from '@inertiajs/vue3';
 import AppShell from '@/Components/Layout/AppShell.vue';
 
 const props = defineProps({
@@ -222,6 +279,32 @@ const showCreateCompany = ref(false);
 const addDepartmentTo = ref(null);
 const editingCompany = ref(null);
 const editingDepartment = ref(null);
+
+const editCompanyForm = useForm({
+  name: '',
+  description: '',
+  industry: '',
+});
+
+const editDeptForm = useForm({
+  name: '',
+  description: '',
+});
+
+watch(editingCompany, (val) => {
+  if (val) {
+    editCompanyForm.name = val.name || '';
+    editCompanyForm.description = val.description || '';
+    editCompanyForm.industry = val.industry || '';
+  }
+});
+
+watch(editingDepartment, (val) => {
+  if (val) {
+    editDeptForm.name = val.name || '';
+    editDeptForm.description = val.description || '';
+  }
+});
 
 function toggleCompany(id) {
   const idx = expandedCompanies.value.indexOf(id);
@@ -269,5 +352,37 @@ function createDepartment() {
       deptForm.reset();
     },
   });
+}
+
+function updateCompany() {
+  editCompanyForm.put(`/organizations/companies/${editingCompany.value.id}`, {
+    preserveScroll: true,
+    onSuccess: () => { editingCompany.value = null; },
+  });
+}
+
+function deleteCompany() {
+  if (confirm('Are you sure?')) {
+    router.delete(`/organizations/companies/${editingCompany.value.id}`, {
+      preserveScroll: true,
+      onSuccess: () => { editingCompany.value = null; },
+    });
+  }
+}
+
+function updateDepartment() {
+  editDeptForm.put(`/organizations/departments/${editingDepartment.value.id}`, {
+    preserveScroll: true,
+    onSuccess: () => { editingDepartment.value = null; },
+  });
+}
+
+function deleteDepartment() {
+  if (confirm('Are you sure?')) {
+    router.delete(`/organizations/departments/${editingDepartment.value.id}`, {
+      preserveScroll: true,
+      onSuccess: () => { editingDepartment.value = null; },
+    });
+  }
 }
 </script>

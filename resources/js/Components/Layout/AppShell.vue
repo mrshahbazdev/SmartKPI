@@ -15,6 +15,7 @@
       <Sidebar
         :collapsed="sidebarCollapsed"
         :current-route="currentRoute"
+        :user-roles="userRoles"
         class="hidden lg:block"
         @toggle="sidebarCollapsed = !sidebarCollapsed"
       />
@@ -23,6 +24,7 @@
       <MobileDrawer
         :open="sidebarOpen"
         :current-route="currentRoute"
+        :user-roles="userRoles"
         @close="sidebarOpen = false"
       />
 
@@ -46,21 +48,31 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { ref, computed, watch } from 'vue';
+import { usePage, router } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 import Topbar from './Topbar.vue';
 import Sidebar from './Sidebar.vue';
 import BottomNav from './BottomNav.vue';
 import MobileDrawer from './MobileDrawer.vue';
+
+const { locale: i18nLocale } = useI18n();
 
 const page = usePage();
 
 const user = computed(() => page.props.auth?.user);
 const locale = computed(() => page.props.locale || 'de');
 const currentRoute = computed(() => page.props.currentRoute || '');
+const userRoles = computed(() => page.props.auth?.user?.roles || []);
 
 const sidebarOpen = ref(false);
 const sidebarCollapsed = ref(false);
+
+// Sync i18n locale with server-provided locale
+watch(locale, (val) => {
+  i18nLocale.value = val;
+  document.documentElement.lang = val;
+}, { immediate: true });
 
 const isDark = ref(localStorage.getItem('theme') === 'dark');
 
@@ -70,6 +82,12 @@ function toggleDark() {
 }
 
 function changeLocale(newLocale) {
-  window.location.href = `/locale/${newLocale}`;
+  router.get(`/locale/${newLocale}`, {}, {
+    preserveState: false,
+    onSuccess: () => {
+      i18nLocale.value = newLocale;
+      document.documentElement.lang = newLocale;
+    },
+  });
 }
 </script>

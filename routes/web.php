@@ -120,13 +120,15 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/organizations/departments/{department}', [OrganizationController::class, 'updateDepartment'])->name('departments.update');
     Route::delete('/organizations/departments/{department}', [OrganizationController::class, 'destroyDepartment'])->name('departments.destroy');
 
-    // Tenants (domain management)
-    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
-    Route::post('/tenants', [TenantController::class, 'store'])->name('tenants.store');
-    Route::put('/tenants/{tenant}', [TenantController::class, 'update'])->name('tenants.update');
-    Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('tenants.destroy');
-    Route::post('/tenants/{tenant}/domains', [TenantController::class, 'storeDomain'])->name('tenants.domains.store');
-    Route::delete('/tenants/{tenant}/domains/{domain}', [TenantController::class, 'destroyDomain'])->name('tenants.domains.destroy');
+    // Tenants (domain management) — admin only
+    Route::middleware('role:super_admin|holding_admin')->group(function () {
+        Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
+        Route::post('/tenants', [TenantController::class, 'store'])->name('tenants.store');
+        Route::put('/tenants/{tenant}', [TenantController::class, 'update'])->name('tenants.update');
+        Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('tenants.destroy');
+        Route::post('/tenants/{tenant}/domains', [TenantController::class, 'storeDomain'])->name('tenants.domains.store');
+        Route::delete('/tenants/{tenant}/domains/{domain}', [TenantController::class, 'destroyDomain'])->name('tenants.domains.destroy');
+    });
 
     // Invitations
     Route::post('/invitations', [InvitationController::class, 'store'])->name('invitations.store');

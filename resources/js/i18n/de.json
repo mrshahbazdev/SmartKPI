@@ -295,6 +295,8 @@
     "create_holding": "Holding erstellen",
     "create_company": "Unternehmen erstellen",
     "create_department": "Abteilung erstellen",
+    "edit_company": "Unternehmen bearbeiten",
+    "edit_department": "Abteilung bearbeiten",
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "name": "Name",
