@@ -20,7 +20,8 @@
     "holding": "Holding-Analyse",
     "forecast": "Prognose",
     "goals": "Ziele",
-    "ai": "KI-Intelligenz"
+    "ai": "KI-Intelligenz",
+    "tenants": "Mandanten & Domains"
   },
   "auth": {
     "login": "Anmelden",
@@ -518,5 +519,17 @@
     "confirm_remove": "Sind Sie sicher, dass Sie den API-Schlüssel entfernen möchten? KI-Funktionen werden deaktiviert.",
     "security_title": "Sicherheit",
     "security_description": "Ihr API-Schlüssel wird mit AES-256-CBC verschlüsselt gespeichert. Nur Sie haben Zugriff darauf. Er wird niemals im Klartext angezeigt oder weitergegeben."
+  },
+  "tenants": {
+    "title": "Mandanten & Domains",
+    "subtitle": "Mandanten und deren Subdomains verwalten",
+    "create": "Mandant erstellen",
+    "edit": "Mandant bearbeiten",
+    "name": "Mandantenname",
+    "domains": "Domains",
+    "add_domain": "Domain hinzufügen",
+    "domain_placeholder": "z.B. kunde.allocontrol.de",
+    "no_domains": "Keine Domains zugewiesen",
+    "no_tenants": "Noch keine Mandanten erstellt"
   }
 }

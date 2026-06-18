@@ -20,7 +20,8 @@
     "holding": "Holding Analysis",
     "forecast": "Forecast",
     "goals": "Goals",
-    "ai": "AI Intelligence"
+    "ai": "AI Intelligence",
+    "tenants": "Tenants & Domains"
   },
   "auth": {
     "login": "Login",
@@ -518,5 +519,17 @@
     "confirm_remove": "Are you sure you want to remove your API key? AI features will be disabled.",
     "security_title": "Security",
     "security_description": "Your API key is stored with AES-256-CBC encryption. Only you have access to it. It is never displayed in plain text or shared."
+  },
+  "tenants": {
+    "title": "Tenants & Domains",
+    "subtitle": "Manage tenants and their subdomains",
+    "create": "Create Tenant",
+    "edit": "Edit Tenant",
+    "name": "Tenant Name",
+    "domains": "Domains",
+    "add_domain": "Add Domain",
+    "domain_placeholder": "e.g. client.allocontrol.de",
+    "no_domains": "No domains assigned",
+    "no_tenants": "No tenants created yet"
   }
 }

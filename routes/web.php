@@ -21,6 +21,7 @@ use App\Http\Controllers\KpiValueController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ScenarioController;
@@ -118,6 +119,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/organizations/departments', [OrganizationController::class, 'storeDepartment'])->name('departments.store');
     Route::put('/organizations/departments/{department}', [OrganizationController::class, 'updateDepartment'])->name('departments.update');
     Route::delete('/organizations/departments/{department}', [OrganizationController::class, 'destroyDepartment'])->name('departments.destroy');
+
+    // Tenants (domain management)
+    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
+    Route::post('/tenants', [TenantController::class, 'store'])->name('tenants.store');
+    Route::put('/tenants/{tenant}', [TenantController::class, 'update'])->name('tenants.update');
+    Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('tenants.destroy');
+    Route::post('/tenants/{tenant}/domains', [TenantController::class, 'storeDomain'])->name('tenants.domains.store');
+    Route::delete('/tenants/{tenant}/domains/{domain}', [TenantController::class, 'destroyDomain'])->name('tenants.domains.destroy');
 
     // Invitations
     Route::post('/invitations', [InvitationController::class, 'store'])->name('invitations.store');

@@ -42,6 +42,17 @@
               <span class="w-5 h-5 flex-shrink-0" v-html="item.iconSvg"></span>
               <span>{{ $t(item.label) }}</span>
             </a>
+
+            <!-- Logout -->
+            <div class="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
+              <form method="POST" action="/logout">
+                <input type="hidden" name="_token" :value="csrfToken" />
+                <button type="submit" class="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors w-full">
+                  <span class="w-5 h-5 flex-shrink-0"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg></span>
+                  <span>{{ $t('nav.logout') }}</span>
+                </button>
+              </form>
+            </div>
           </nav>
         </aside>
       </div>
@@ -56,6 +67,8 @@ defineProps({
 });
 
 defineEmits(['close']);
+
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
 
 const navItems = [
   {
@@ -99,6 +112,12 @@ const navItems = [
     href: '/organizations',
     label: 'nav.organizations',
     iconSvg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>',
+  },
+  {
+    route: 'tenants',
+    href: '/tenants',
+    label: 'nav.tenants',
+    iconSvg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>',
   },
   {
     route: 'settings',
