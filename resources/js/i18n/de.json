@@ -78,6 +78,21 @@
       "critical": "Kritisch"
     }
   },
+  "analysis": {
+    "title": "Analyse",
+    "subtitle": "Ursachenanalyse und Problemverfolgung",
+    "active_problems": "Aktive Probleme",
+    "problem": "Problem",
+    "kpi": "Kennzahl",
+    "severity": "Schweregrad",
+    "root_causes": "Ursachen",
+    "detected": "Erkannt",
+    "root_cause_breakdown": "Ursachenverteilung",
+    "cause_effect": "Ursache-Wirkung-Beziehungen",
+    "status_investigating": "In Untersuchung",
+    "status_action_planned": "Maßnahme geplant",
+    "status_resolved": "Gelöst"
+  },
   "cause": {
     "root_cause": "Ursache",
     "analysis": "Ursachenanalyse"
