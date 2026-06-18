@@ -188,6 +188,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/onboarding/invitations', [OnboardingController::class, 'saveInvitations'])->name('onboarding.invitations');
     Route::post('/onboarding/complete', [OnboardingController::class, 'complete'])->name('onboarding.complete');
 
+    // Settings hub
+    Route::get('/settings', fn () => \Inertia\Inertia::render('Settings/Index'))->name('settings');
+
     // White-labeling
     Route::get('/settings/white-label', [WhiteLabelController::class, 'index'])->name('settings.white-label');
     Route::put('/settings/white-label', [WhiteLabelController::class, 'update'])->name('settings.white-label.update');
