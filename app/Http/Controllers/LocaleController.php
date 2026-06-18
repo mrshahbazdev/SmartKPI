@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class LocaleController extends Controller
 {
@@ -19,6 +20,10 @@ class LocaleController extends Controller
             Auth::user()->update(['locale' => $locale]);
         }
 
-        return redirect()->back();
+        $url = $request->headers->get('referer', '/dashboard');
+
+        return redirect($url)->withCookie(
+            Cookie::make('locale', $locale, 60 * 24 * 365)
+        );
     }
 }

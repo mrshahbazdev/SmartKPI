@@ -18,6 +18,8 @@ class SetLocale
             $locale = Auth::user()->locale;
         } elseif ($request->session()->has('locale')) {
             $locale = $request->session()->get('locale');
+        } elseif ($request->cookie('locale')) {
+            $locale = $request->cookie('locale');
         }
 
         if (in_array($locale, ['de', 'en'])) {

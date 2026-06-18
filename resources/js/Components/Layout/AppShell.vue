@@ -82,12 +82,6 @@ function toggleDark() {
 }
 
 function changeLocale(newLocale) {
-  router.get(`/locale/${newLocale}`, {}, {
-    preserveState: false,
-    onSuccess: () => {
-      i18nLocale.value = newLocale;
-      document.documentElement.lang = newLocale;
-    },
-  });
+  window.location.href = `/locale/${newLocale}`;
 }
 </script>
