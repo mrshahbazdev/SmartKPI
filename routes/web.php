@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\AlertRuleController;
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompanyDashboardController;
@@ -67,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
     // Main Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+<<<<<<< HEAD
     // Level-specific Dashboards
     Route::get('/dashboard/department/{department}', [DepartmentDashboardController::class, 'show'])->name('dashboard.department');
     Route::get('/dashboard/company/{company}', [CompanyDashboardController::class, 'show'])->name('dashboard.company');
@@ -89,6 +91,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kpis/{kpi}/values/import', [KpiValueController::class, 'import'])->name('kpi-values.import');
     Route::put('/kpi-values/{value}', [KpiValueController::class, 'update'])->name('kpi-values.update');
     Route::delete('/kpi-values/{value}', [KpiValueController::class, 'destroy'])->name('kpi-values.destroy');
+
+    // Analysis
+    Route::get('/analysis', [AnalysisController::class, 'index'])->name('analysis');
 
     // Organizations
     Route::get('/organizations', [OrganizationController::class, 'index'])->name('organizations.index');

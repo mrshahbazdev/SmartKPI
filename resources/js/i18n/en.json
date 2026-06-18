@@ -132,6 +132,21 @@
       "critical": "Critical"
     }
   },
+  "analysis": {
+    "title": "Analysis",
+    "subtitle": "Root cause analysis and problem tracking",
+    "active_problems": "Active Problems",
+    "problem": "Problem",
+    "kpi": "KPI",
+    "severity": "Severity",
+    "root_causes": "Root Causes",
+    "detected": "Detected",
+    "root_cause_breakdown": "Root Cause Breakdown",
+    "cause_effect": "Cause-Effect Relationships",
+    "status_investigating": "Investigating",
+    "status_action_planned": "Action Planned",
+    "status_resolved": "Resolved"
+  },
   "cause": {
     "root_cause": "Root Cause",
     "analysis": "Root Cause Analysis",
