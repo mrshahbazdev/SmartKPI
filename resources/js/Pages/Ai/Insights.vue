@@ -13,10 +13,10 @@ const form = useForm({ kpi_id: '' })
 
 const generate = () => {
     form.kpi_id = selectedKpi.value
-    form.post(route('ai.insights.generate'), { preserveScroll: true })
+    form.post('/ai/insights/generate', { preserveScroll: true })
 }
 
-const dismiss = (id) => router.post(route('ai.dismiss', id), {}, { preserveScroll: true })
+const dismiss = (id) => router.post(`/ai/insights/${id}/dismiss`, {}, { preserveScroll: true })
 </script>
 
 <template>
