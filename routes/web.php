@@ -5,6 +5,7 @@ use App\Http\Controllers\AlertRuleController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\CompanyDashboardController;
 use App\Http\Controllers\DailyFocusController;
 use App\Http\Controllers\DashboardController;
@@ -56,6 +57,21 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 });
+
+// Email verification
+Route::get('/email/verify', fn () => \Inertia\Inertia::render('Auth/VerifyEmail'))
+    ->middleware('auth')
+    ->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // Invitation routes
 Route::get('/invitation/{token}', [InvitationController::class, 'accept'])->name('invitation.accept');
