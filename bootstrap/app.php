@@ -18,8 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
             CheckInstalled::class,
-            HandleInertiaRequests::class,
             SetLocale::class,
+            HandleInertiaRequests::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
